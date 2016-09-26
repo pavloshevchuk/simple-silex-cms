@@ -1,0 +1,19 @@
+App\Domain\Entity\ProductEntity:
+  type: entity
+  table: products
+  id:
+    product_id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string
+      length: 255
+    description:
+      type: text
+      nullable: true
+    created:
+      type: datetime
+    updated:
+      type: datetime

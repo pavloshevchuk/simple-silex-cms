@@ -1,0 +1,27 @@
+product.read.all:
+  path: /
+  defaults:
+    _controller: 'App\Infrastructure\Controller\ProductController::productReadAllAction'
+  methods: [ GET ]
+
+product.create:
+  path: /create
+  defaults:
+    _controller: 'App\Infrastructure\Controller\ProductController::productCreateAction'
+  methods: [ GET, POST ]
+
+product.read:
+  path: /{productId}
+  defaults:
+    _controller: 'App\Infrastructure\Controller\ProductController::productReadAction'
+  methods: [ GET ]
+  requirements:
+    productId: \d+
+
+product.update:
+  path: /{productId}/update
+  defaults:
+    _controller: 'App\Infrastructure\Controller\ProductController::productUpdateAction'
+  methods: [ GET, POST ]
+  requirements:
+    productId: \d+

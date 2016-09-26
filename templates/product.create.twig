@@ -1,0 +1,56 @@
+{% include 'includes/header.twig' %}
+
+<script src="//cdn.ckeditor.com/4.5.11/basic/ckeditor.js"></script>
+
+<div class="container">
+    <h1>{{ title }}</h1>
+    {{ form_start(form, {'method': 'POST'}) }}
+
+    {% set error = form_errors(form) %}
+    {% set error_title = form_errors(form.title) %}
+    {% set error_description = form_errors(form.description) %}
+
+    {% if error is not empty %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close"
+                    data-dismiss="alert">&times;</button>
+            {{ error|raw }}
+        </div>
+    {% endif %}
+
+    <div class="form-group {{ error_title is not empty ? 'has-error' }}">
+        {{ form_label(form.title, 'Title', {'label_attr': {'class': 'control-label'}}) }}
+        {% if error_title is not empty %}
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close"
+                        data-dismiss="alert">&times;</button>
+                {{ error_title|raw }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group {{ error_description is not empty ? 'has-error' }}">
+        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'control-label'}}) }}
+        {% if error_description is not empty %}
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close"
+                        data-dismiss="alert">&times;</button>
+                {{ error_description|raw }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 6}}) }}
+        <script>
+            CKEDITOR.replace( 'form_description' );
+        </script>
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.create, {'label': action, 'attr': {'class': 'btn btn-primary'}}) }}
+        <a class="btn btn-default"
+           href="{{ path('product.read.all') }}">Cancel</a>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% include 'includes/footer.twig' %}

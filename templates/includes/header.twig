@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Silex authentication</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="http://bootswatch.com/yeti/bootstrap.min.css">
+
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 80px;
+        }
+
+        .container {
+            max-width: 980px;
+        }
+
+        .footer {
+            padding: 20px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 80px;
+        }
+
+        .table > tbody > tr > td {
+            vertical-align: middle;
+        }
+
+        @media (min-width: 768px) {
+            .center-block {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    {% set route = global.request.get('_route') %}
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('index') }}">WebSiteName</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="{{ route == 'index' ? 'active' }}"><a
+                                href="{{ path('index') }}">Home</a></li>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="{{ route starts with 'product' ? 'active' }}"><a
+                                href="{{ path('product.read.all') }}">Products</a></li>
+                {% endif %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="{{ path('logout') }}"><span
+                                    class="glyphicon glyphicon-log-out"></span>
+                            Logout</a></li>
+                {% else %}
+                    <li class="{{ route == 'login' ? 'active' }}"><a
+                                href="{{ path('login') }}"><span
+                                    class="glyphicon glyphicon-log-in"></span>
+                            Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

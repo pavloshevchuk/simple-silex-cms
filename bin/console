@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+$app = application();
+/** @var \Symfony\Component\Console\Application $application */
+$application = &$app['console'];
+$application->add(new \App\Infrastructure\Command\GenerateProductEntries());
+$application->run();

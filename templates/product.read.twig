@@ -1,0 +1,23 @@
+{% include 'includes/header.twig' %}
+
+<div class="container">
+    <h1>{{ product.title }}</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Overview</div>
+        <div class="panel-body">
+            <div class="col-sm-2 text-right"><strong>Created:</strong></div>
+            <div class="col-sm-10">{{ product.created }}</div>
+            <div class="col-sm-2 text-right"><strong>Updated:</strong></div>
+            <div class="col-sm-10">{{ product.updated }}</div>
+        </div>
+    </div>
+
+    {% if product.description is not empty %}
+        <div class="col-sm-12">
+            {{ product.description|raw }}
+        </div>
+    {% endif %}
+</div>
+
+{% include 'includes/footer.twig' %}

@@ -1,0 +1,8 @@
+.idea
+bin/doctrine.php
+bin/doctrine-dbal
+bin/doctrine
+runtime/*
+vendor
+*.rdb
+!*.exists

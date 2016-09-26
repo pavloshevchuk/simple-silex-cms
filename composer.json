@@ -1,0 +1,29 @@
+{
+    "require": {
+        "silex/silex": "~2.0",
+        "symfony/config": "3.1.*",
+        "symfony/form": "~2.8",
+        "symfony/security": "3.1.*",
+        "symfony/translation": "3.1.*",
+        "symfony/twig-bridge": "3.1.*",
+        "symfony/validator": "3.1.*",
+        "symfony/yaml": "3.1.*",
+        "twig/twig": "1.24.*",
+        "twig/extensions": "1.3.*",
+        "doctrine/orm": "~2.5",
+        "knplabs/console-service-provider": "~2.0"
+    },
+    "config": {
+        "cache-files-ttl": 0,
+        "bin-dir": "bin/",
+        "discard-changes": true
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        },
+        "files": [
+            "bootstrap.php"
+        ]
+    }
+}

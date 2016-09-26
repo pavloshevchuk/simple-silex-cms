@@ -1,0 +1,16 @@
+doctrine:
+  enabled: true
+  profiles:
+    mysql:
+      enabled: true
+      dbal:
+        driver: pdo_mysql
+        host: 127.0.0.1
+        port: 3306
+        dbname: app
+        user: root
+        password: keZ5phuv3$
+      orm:
+        cache: array
+        config_dir:  %config_dir%%dir_separator%doctrine
+        proxy_dir: %runtime_dir%%dir_separator%data%dir_separator%doctrine%dir_separator%proxies

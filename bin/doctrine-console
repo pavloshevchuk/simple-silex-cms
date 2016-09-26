@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+$profile = null;
+foreach($argv as $arg) {
+    if (strpos($arg, '--profile=') === 0) {
+        $profile = str_replace('--profile=', '', $arg);
+        break;
+    }
+}
+
+$environment = null;
+foreach($argv as $arg) {
+    if (strpos($arg, '--env=') === 0) {
+        $environment = str_replace('--env=', '', $arg);
+        break;
+    }
+}
+
+putenv("APP_ENV=" . $environment);
+$app = application();
+
+if (is_null($profile) || !$app['orm.enabled.profile']($profile)) {
+    $output = new ConsoleOutput();
+    $output->writeln('<bg=red;fg=white>Given profile is\'t exists or inactive.');
+    return 0;
+}
+
+/** @var \Doctrine\ORM\EntityManager $entityManager */
+$entityManager = $app['orm.ems'][$profile];
+
+$helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
+    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($entityManager->getConnection()),
+    'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($entityManager)
+));
+
+$cli = Doctrine\ORM\Tools\Console\ConsoleRunner::createApplication($helperSet, array());
+
+$cli->getDefinition()->addOptions([
+    new InputOption('profile', null, InputOption::VALUE_REQUIRED, 'The profile to operate with.'),
+]);
+
+$cli->run();

@@ -1,0 +1,21 @@
+index:
+  path: /
+  defaults:
+    _controller: 'App\Infrastructure\Controller\IndexController::indexAction'
+  methods: [ GET ]
+
+login:
+  path: /login
+  defaults:
+    _controller: 'App\Infrastructure\Controller\IndexController::loginAction'
+  methods: [ GET ]
+
+help:
+  path: /help
+  defaults:
+    _controller: 'App\Infrastructure\Controller\IndexController::helpAction'
+  methods: [ GET ]
+
+product:
+  prefix: /product
+  resource: product.yml
