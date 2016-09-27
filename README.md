@@ -1,6 +1,8 @@
+# Simple Silex CMS
+
 Application
 -------
-Run php server:
+Run application:
 ```
 $ php -S localhost:8000 -t public
 ```
