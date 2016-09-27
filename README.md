@@ -13,9 +13,9 @@ Requirements
 Packages
 --------
 * Doctrine 2 for database access.
-* Twig as template system.
 * Symfony form/validator component for building forms and validation.
 * Symfony security component for authorization and authentication.
+* Twig as template system.
 * Bootstrap framework 3.3.
 
 Usage
