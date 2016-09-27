@@ -1,7 +1,14 @@
 # Simple Silex CMS
 
-Application
+General
 -------
+Install core component:
+```
+$ composer install
+```
+
+Application
+-----------
 Run application:
 ```
 $ php -S localhost:8000 -t public
